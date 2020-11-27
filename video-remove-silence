@@ -245,7 +245,7 @@ def compress_audio(args, wav, start_frame, end_frame, result_frames):
         result[:(left_length-crossfade_length)*frame_width] = left_frames[:-crossfade_length*frame_width]
         result[-(right_length-crossfade_length)*frame_width:] = right_frames[crossfade_length*frame_width:]
         for i in range(crossfade_length):
-            r = i / (crossfade_length - 1)
+            r = i / (crossfade_length - 1 + 0.1)
             l = 1 - r
             for channel in range(channels):
                 signal_left = int.from_bytes(left_frames[(left_length-crossfade_length+i)*frame_width+channel*sample_width:(left_length-crossfade_length+i)*frame_width+(channel+1)*sample_width], 'little', signed=True)
